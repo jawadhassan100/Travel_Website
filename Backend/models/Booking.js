@@ -6,6 +6,7 @@ const bookingSchema = new mongoose.Schema({
   transportId: { type: mongoose.Schema.Types.ObjectId, ref: 'Vehicle', required: false },
   userEmail: { type: String, required: true },
   userName: { type: String, required: true },
+  whatsAppNumber:{type: Number , requirred: true },
   bookingDate: { type: Date, default: Date.now },
 });
 

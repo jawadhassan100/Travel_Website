@@ -7,7 +7,7 @@ const Transport = require('../models/Trasnport'); // Import Transport model
 // Create a new booking
 exports.createBooking = async (req, res) => {
   try {
-    const { tourId, transportId, userEmail, userName } = req.body;
+    const { tourId, transportId, userEmail, userName , whatsAppNumber} = req.body;
 
     // Check if required fields are provided
     if (!userEmail || !userName || (!tourId && !transportId)) {
@@ -41,6 +41,7 @@ exports.createBooking = async (req, res) => {
       tourId: tourId || null, // Set to null if not booked
       transportId: transportId || null, // Set to null if not booked
       totalPrice,
+      whatsAppNumber,
       userEmail,
       userName,
       tourName,
