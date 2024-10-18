@@ -2,8 +2,8 @@
 const mongoose = require('mongoose');
 
 const bookingSchema = new mongoose.Schema({
-  tourId: { type: mongoose.Schema.Types.ObjectId, ref: 'Tour', required: true },
-  transportId: { type: mongoose.Schema.Types.ObjectId, ref: 'Vehicle', required: true },
+  tourId: { type: mongoose.Schema.Types.ObjectId, ref: 'Tour', required: false },
+  transportId: { type: mongoose.Schema.Types.ObjectId, ref: 'Vehicle', required: false },
   userEmail: { type: String, required: true },
   userName: { type: String, required: true },
   bookingDate: { type: Date, default: Date.now },

@@ -4,56 +4,65 @@ const bookingEmail = require("../utils/Templates/bookingEmail");
 const Tour = require('../models/Tour'); // Import Tour model
 const Transport = require('../models/Trasnport'); // Import Transport model
 // Create a new booking
+// Create a new booking
 exports.createBooking = async (req, res) => {
-    try {
-      const { tourId, transportId, userEmail, userName } = req.body;
-  
-       // Check if required fields are provided
-    if (!tourId || !transportId || !userEmail || !userName ) {
-        return res.status(400).json({ message: 'All fields are required' });
-      }
-       // Fetch tour and transport details
-    const tour = await Tour.findById(tourId);
-    const transport = await Transport.findById(transportId);
+  try {
+    const { tourId, transportId, userEmail, userName } = req.body;
 
-    // Ensure both tour and transport are found
-    if (!tour || !transport) {
-      return res.status(404).json({ message: 'Tour or transport not found' });
+    // Check if required fields are provided
+    if (!userEmail || !userName || (!tourId && !transportId)) {
+      return res.status(400).json({ message: 'User email, user name, and at least one of tourId or transportId are required' });
     }
 
-    // Calculate total price (sum of tour price and transport price)
-    const totalPrice = tour.price + transport.price; // Assuming `price` exists on both models
-    const tourName = tour.cityName;
-    const transportType = transport.vehicleName
-    console.log('Tour Name:', tourName); // Log tour name
-    console.log('Transport Type:', transportType); // Log transport type
-    console.log('Total Price:', totalPrice); // Log total price 
+    let totalPrice = 0;
+    let tourName = '';
+    let transportType = '';
 
-      const newBooking = new Booking({
-        tourId,
-        transportId,
-        totalPrice,
-        userEmail,
-        userName,
-        tourName, 
-        transportType 
-      });
-  
-      await newBooking.save();
-  
-      // Prepare email details
+    // Fetch tour and transport details if they exist
+    if (tourId) {
+      const tour = await Tour.findById(tourId);
+      if (!tour) {
+        return res.status(404).json({ message: 'Tour not found' });
+      }
+      totalPrice += tour.price; // Add tour price
+      tourName = tour.cityName;  // Get tour name
+    }
+
+    if (transportId) {
+      const transport = await Transport.findById(transportId);
+      if (!transport) {
+        return res.status(404).json({ message: 'Transport not found' });
+      }
+      totalPrice += transport.price; // Add transport price
+      transportType = transport.vehicleName; // Get transport type
+    }
+
+    const newBooking = new Booking({
+      tourId: tourId || null, // Set to null if not booked
+      transportId: transportId || null, // Set to null if not booked
+      totalPrice,
+      userEmail,
+      userName,
+      tourName,
+      transportType
+    });
+
+    await newBooking.save();
+
+    // Prepare email details
     const subject = "Booking Confirmation";
-    const htmlContent = bookingEmail(userName,  tourName , transportType , totalPrice);
+    const htmlContent = bookingEmail(userName, tourName, transportType, totalPrice);
 
     // Send order confirmation email
     sendMail(userEmail, subject, htmlContent);
-  
-      res.status(201).json({ message: 'Booking created successfully', booking: newBooking });
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ message: 'Error creating booking', error });
-    }
-  };
+
+    res.status(201).json({ message: 'Booking created successfully', booking: newBooking });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Error creating booking', error });
+  }
+};
+
   
   // Get all bookings
   exports.getAllBookings = async (req, res) => {
