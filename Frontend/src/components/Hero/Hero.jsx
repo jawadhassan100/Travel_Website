@@ -4,8 +4,18 @@ import { FaArrowRightLong } from "react-icons/fa6";
 import HeroImg1 from "../../assets/himg1.png"
 import HeroImg2 from "../../assets/himg2.png"
 import HeroImg3 from "../../assets/himg3.png"
+import { useState } from "react";
 
 const Hero = () => {
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  const handleNextSlide = () => {
+    setCurrentSlide((prevSlide) => (prevSlide + 1) % 3);
+  };
+
+  const handlePrevSlide = () => {
+    setCurrentSlide((prevSlide) => (prevSlide - 1 + 3) % 3);
+  };
   return (
     <div className="  bg-image ">
       <div className="bg-black opacity-75 h-[100vh] ">
@@ -29,19 +39,20 @@ const Hero = () => {
               </div>
               <div className="-mt-16 mr-6 hidden lg:block">
                 <div className="mt-[270px] ml-[400px] flex gap-[15px]">
-                  <div className="bg-white px-[10px]  py-[10px] rounded-[50%] text-[25px] opacity-75">
-                    <IoIosArrowBack />
-                  </div>
-                  <div className="bg-white px-[10px]  py-[10px] rounded-[50%] text-[25px] opacity-75">
-                    <IoIosArrowForward />
-                  </div>
+                <button onClick={handlePrevSlide} className="bg-white px-[10px] py-[10px] rounded-[50%] text-[25px] opacity-75">
+                <IoIosArrowBack />
+              </button>
+              <button onClick={handleNextSlide} className="bg-white px-[10px] py-[10px] rounded-[50%] text-[25px] opacity-75">
+                <IoIosArrowForward />
+              </button>
                 </div>
 
                 <div className=" lg:flex  md:gap-[8px]">
                   <div className="mt-[60px]">
                     <img
                       src={HeroImg1}
-                      className="w-[280px] rounded-[15px]"
+                      className={`w-[280px] rounded-[15px] ${currentSlide === 0 ? 'opacity-100' : 'opacity-50'}`} 
+                     
                       alt=""
                     />
                  
@@ -49,14 +60,14 @@ const Hero = () => {
                   <div className="mt-[30px]">
                     <img
                       src={HeroImg2}
-                      className="w-[280] rounded-[15px]"
+                      className={`w-[280px] rounded-[15px] ${currentSlide === 1 ? 'opacity-100' : 'opacity-50'}`}
                       alt=""
                     />
                   </div>
                   <div className="mt-[50px]">
                     <img
                       src={HeroImg3}
-                      className="rounded-[15px]"
+                      className={`w-[280px] rounded-[15px] ${currentSlide === 2 ? 'opacity-100' : 'opacity-50'}`}
                       alt=""
                     />
                   </div>
