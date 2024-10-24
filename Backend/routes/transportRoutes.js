@@ -20,8 +20,8 @@ router.post(
   auth, adminAuth, addVehicle
 ); // Use the upload middleware
 
-router.get("/",auth, adminAuth,  getAllVehicles); // Get all vehicles
-router.get("/:id", auth, adminAuth,  getVehicleById); // Get a vehicle by ID
+router.get("/"  , getAllVehicles); // Get all vehicles
+router.get("/:id",  getVehicleById); // Get a vehicle by ID
 router.put(
   "/:id",
   upload.fields([

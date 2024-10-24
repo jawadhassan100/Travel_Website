@@ -20,10 +20,10 @@ router.post('/', upload.fields([
 ]), auth, adminAuth, addTour);
 
 // Route to get all tours
-router.get('/', auth, adminAuth, getAllTours);
+router.get('/',  getAllTours);
 
 // Route to get a single tour by ID
-router.get('/:id', auth, adminAuth, getTourById);
+router.get('/:id',  getTourById);
 
 // Route to update a tour by ID (with optional image uploads)
 router.put('/:id', upload.fields([

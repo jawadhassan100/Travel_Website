@@ -32,27 +32,27 @@ const Navbar = ({ setIsNavbarOpen }) => {
 
         {/* Desktop Menu */}
         <div className="list-none hidden md:flex lg:flex xl:flex md:text-[18px] text-white items-center md:gap-5 space-x-8 ">
-          <Link to="/home">
+          <Link to="/">
             <li className="menu-item relative pb-1 hover:after:w-full after:w-0 after:h-[2px] after:bg-white after:absolute after:left-0 after:bottom-0 after:transition-all after:duration-300">
               Home
             </li>
           </Link>
-          <Link to="/home">
+          <Link to="/tour">
             <li className="menu-item relative pb-1 hover:after:w-full after:w-0 after:h-[2px] after:bg-white after:absolute after:left-0 after:bottom-0 after:transition-all after:duration-300">
               Tour Sites
             </li>
           </Link>
-          <Link to="/home">
+          <Link to="/transport">
             <li className="menu-item relative pb-1 hover:after:w-full after:w-0 after:h-[2px] after:bg-white after:absolute after:left-0 after:bottom-0 after:transition-all after:duration-300">
               Transport
             </li>
           </Link>
-          <Link to="/home">
+          <Link to="/blog">
             <li className="menu-item relative pb-1 hover:after:w-full after:w-0 after:h-[2px] after:bg-white after:absolute after:left-0 after:bottom-0 after:transition-all after:duration-300">
               Blog
             </li>
           </Link>
-          <Link to="/about-us">
+          <Link to="/contact-us">
             <li className="outline-white outline w-fit px-3 py-0.5 outline-2 rounded-[30px]">
               Contact Us
             </li>
