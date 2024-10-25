@@ -1,9 +1,17 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import LoadingAnimation from "../LoadingAnimation/LoadingAnimation";
+
 
 const Transport = () => {
   const [transport, setTransport] = useState([]);
+  const [loading, setLoading] = useState(true); // New loading state
+
+ useEffect(() => {
+    // Scroll to top on component mount
+    window.scrollTo(0, 0);
+  }, []); // Empty dependency array ensures this runs only on mount
 
   useEffect(() => {
     // Fetch all tours from the backend
@@ -11,13 +19,24 @@ const Transport = () => {
       try {
         const response = await axios.get("http://localhost:6600/trasnport"); // Assuming the backend API is at this route
         setTransport(response.data);
+        setLoading(false); // Data has been loaded, so hide loader
       } catch (error) {
         console.error("Error fetching tours:", error);
+        setLoading(false); // Even in case of error, stop loading
       }
     };
 
     fetchTours();
   }, []);
+
+   // Conditionally render the loader if data is still being fetched
+   if (loading) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <LoadingAnimation /> {/* Show loading animation */}
+      </div>
+    );
+  }
 
   return (
     <>

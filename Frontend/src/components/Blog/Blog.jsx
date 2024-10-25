@@ -2,8 +2,15 @@ import hunza from "../../assets/hunza.png"
 import murree from "../../assets/murree.png"
 import prado5 from "../../assets/prado5.png"
 import landcrusier from "../../assets/landcrusier.png"
+import Reviews from "../Reviews/Reviews"
+import Footer from "../Footer/Footer"
+import  { useEffect } from 'react';
 
 const Blog = () => {
+ useEffect(() => {
+    // Scroll to top on component mount
+    window.scrollTo(0, 0);
+  }, []); // Empty dependency array ensures this runs only on mount
   return (
    <>
    <div className="bg-slate-400 pt-16 h-full pb-4">
@@ -57,6 +64,8 @@ const Blog = () => {
       </div>
       </section>
    </div>
+   <Reviews/>
+   <Footer/>
    </>
   )
 }

@@ -1,10 +1,12 @@
 import  { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom'; // Assuming you're using React Router
 import axios from 'axios';
+import LoadingAnimation from "../LoadingAnimation/LoadingAnimation";
 
 const TransportDetail = () => {
     const { id } = useParams(); // Get tour ID from URL parameters
     const [transport, setTransport] = useState(null); // State to hold tour data
+    const [loading, setLoading] = useState(true); // New loading state
   
     useEffect(() => {
       // Fetch tour details from backend by ID
@@ -12,16 +14,23 @@ const TransportDetail = () => {
         try {
           const response = await axios.get(`http://localhost:6600/trasnport/${id}`); // Adjust the API route if needed
           setTransport(response.data); // Store fetched tour data
+          setLoading(false); 
         } catch (error) {
           console.error('Error fetching trasnport:', error);
+          setLoading(false); 
         }
       };
       fetchTour();
     }, [id]);
   
-    if (!transport) {
-      return <div>Loading...</div>; 
-    }
+   // Conditionally render the loader if data is still being fetched
+   if (loading) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <LoadingAnimation /> {/* Show loading animation */}
+      </div>
+    );
+  }
   
     return (
       <>

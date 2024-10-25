@@ -4,7 +4,13 @@ import { Link } from "react-router-dom";
 
 const Tours = () => {
   const [tours, setTours] = useState([]);
+  useEffect(() => {
+     // Scroll to top on component mount
+     window.scrollTo(0, 0);
 
+   }, []); // Empty dependency array ensures this runs only on mount
+
+   
   useEffect(() => {
     // Fetch all tours from the backend
     const fetchTours = async () => {
