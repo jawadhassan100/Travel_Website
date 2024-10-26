@@ -9,7 +9,7 @@ const ToursPage = () => {
     // Fetch all tours from the backend
     const fetchTours = async () => {
       try {
-        const response = await axios.get("http://localhost:6600/tour"); // Assuming the backend API is at this route
+        const response = await axios.get("http://localhost:6600/tour"); 
         setTours(response.data);
       } catch (error) {
         console.error("Error fetching tours:", error);

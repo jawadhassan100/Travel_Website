@@ -22,7 +22,7 @@ const Blog = () => {
                 <p className="leading-[30px] mb-[20px] font-[600]">Traveling through the breathtaking landscapes of Hunza and Murree offers an unparalleled experience that captivates the senses. With majestic mountains, lush valleys, and serene lakes, these destinations are perfect for nature lovers and adventure seekers alike.</p>
                 <p className="leading-[30px] font-[600]">On our tours, you can expect personalized itineraries tailored to your preferences, allowing you to discover hidden gems and iconic landmarks.</p>
             </div>
-            <div className="lg:w-[64%] md:w-[48%]  md:flex gap-2 md:pb-[40px]">
+            <div className="lg:w-[64%] md:w-[48%]  md:flex gap-2 pb-4 md:pb-[40px]">
                 <img src={hunza} alt="" />
                 <img src={murree} className="hidden md:block" alt="" />
             </div>

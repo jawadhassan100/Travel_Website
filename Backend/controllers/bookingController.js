@@ -57,7 +57,7 @@ exports.createBooking = async (req, res) => {
     // Send order confirmation email
     sendMail(userEmail, subject, htmlContent);
 
-    res.status(201).json({ message: 'Booking created successfully', booking: newBooking });
+    res.status(201).json({ message: 'Booking created successfully', booking: newBooking ,totalPrice: newBooking.totalPrice });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Error creating booking', error });

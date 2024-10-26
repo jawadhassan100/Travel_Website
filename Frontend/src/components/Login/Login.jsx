@@ -3,12 +3,14 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useSnackbar } from "notistack";
 import { AuthContext } from "../AuthContext/AuthContext"; // Import AuthContext
+
+
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { enqueueSnackbar } = useSnackbar();
   const navigate = useNavigate();
-  const { setIsAdmin}  = useContext(AuthContext); // Use the context
+  const { setIsAdmin }  = useContext(AuthContext); // Use the context
   const handleSubmit = async (e) => {
     e.preventDefault();
   

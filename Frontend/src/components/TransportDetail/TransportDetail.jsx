@@ -34,7 +34,7 @@ const TransportDetail = () => {
   
     return (
       <>
-      <div>
+      <div className='overflow-hidden'>
   
       
         <div

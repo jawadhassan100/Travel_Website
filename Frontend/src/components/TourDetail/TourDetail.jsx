@@ -28,7 +28,7 @@ const TourDetail = () => {
 
   return (
     <>
-    <div>
+    <div className='overflow-hidden'>
 
     
       <div

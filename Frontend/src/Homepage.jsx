@@ -40,6 +40,8 @@ const Homepage = () => {
 
   return (
     <>
+    <div className='overflow-hidden'>
+
       <Hero />
       <HeroFooter />
       <Features />
@@ -49,6 +51,7 @@ const Homepage = () => {
       <QuickCall />
       <Reviews />
       <Footer />
+    </div>
 
       {/* Scroll to Top Button */}
       {showScrollButton && (

@@ -15,7 +15,9 @@ import Login from "./components/Login/Login";
 import { AuthProvider } from "./components/AuthContext/AuthContext";
 import Unauthorized from "./components/Unauthorized/Unauthorized";
 import AdminRoutes from "./components/AdminRoutes/AdminRoutes"
-
+import Dashboard from "./components/Dashboard/Dashboard";
+import AllContacts from "./components/AllContacts/AllContacts"
+import AllBookings from "./components/AllBookings/AllBookings";
 
 const App = () => {
   const [isNavbarOpen, setIsNavbarOpen] = useState(false);
@@ -36,9 +38,12 @@ const App = () => {
    <Route path="/register" element={<Register />} />
    <Route path="/login" element={<Login />} />
    <Route path="/unauthorized" element={<Unauthorized/>} />
+   <Route path="/dashboard" element={<Dashboard/>} />
+   <Route path="/all-contacts" element={<AllContacts/>} />
+   <Route path="/all-bookings" element={<AllBookings/>} />
    </Routes>
    </div>
-    </AuthProvider>
+   </AuthProvider>
     </>
   )
 }
