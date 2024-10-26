@@ -39,7 +39,7 @@ const reviewsData = [
 ];
 
 const Reviews = () => {
-  const [selectedReview, setSelectedReview] = useState(reviewsData[0]);
+  const [selectedReview, setSelectedReview] = useState(reviewsData[2]);
 
   const handleImageClick = (review) => {
     setSelectedReview(review);
@@ -47,7 +47,7 @@ const Reviews = () => {
 
   return (
     <>
-      <div className="bg-[#F3F3F3] pb-[40px] pt-10">
+      <div className="bg-[#F3F3F3] pb-[40px] pt-10  ">
         <div className="item-center justify-center flex">
           <h1 className="text-[25px] px-[10px] lg:[48px] font-[700] text-[#525252]">
             Here is what our Clients are saying About us
@@ -56,10 +56,10 @@ const Reviews = () => {
 
         <div className="flex align-center justify-center mt-[30px]">
           <div className="bg-[white] w-[583px] rounded-[20px]">
-            <h2 className="flex justify-center text-[22px] font-[700] mt-[50px] mb-[30px]">
+            <h2 className="flex justify-center text-[22px] font-[700] mt-[40px] mb-[30px]">
               {selectedReview.name} says:
             </h2>
-            <p className="px-[10px] lg:px-[30px] text-[18px] align-center font-[500] pb-[15px]">
+            <p className="px-[10px] lg:px-[30px] text-[18px] text-center align-center font-[500] pb-[15px]">
               {selectedReview.review}
             </p>
           </div>
@@ -72,11 +72,11 @@ const Reviews = () => {
                 src={review.image}
                 alt={review.name}
                 className={`cursor-pointer transition-transform duration-300 ${
-                  selectedReview.id === review.id ? "scale-125" : ""
+                  selectedReview.id === review.id ? "scale-150" : ""
                 }`}
                 onClick={() => handleImageClick(review)}
               />
-              <p className="flex justify-center align-center font-[700]">{review.name}</p>
+              <p className="flex justify-center align-center font-[700] mt-4">{review.name}</p>
             </div>
           ))}
         </div>

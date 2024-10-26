@@ -8,11 +8,20 @@ import Tours from "./components/Tours/Tours";
 import Transport from "./components/Transport/Transport";
 import TransportDetail from "./components/TransportDetail/TransportDetail";
 import Blog from "./components/Blog/Blog";
+import Contact from "./components/ContactUs/ContactUs";
+import BookingForm from "./components/BookingForm/BookingForm";
+import Register from "./components/Register/Register";
+import Login from "./components/Login/Login";
+import { AuthProvider } from "./components/AuthContext/AuthContext";
+import Unauthorized from "./components/Unauthorized/Unauthorized";
+import AdminRoutes from "./components/AdminRoutes/AdminRoutes"
+
 
 const App = () => {
   const [isNavbarOpen, setIsNavbarOpen] = useState(false);
   return (
     <>
+    <AuthProvider>
     <Navbar setIsNavbarOpen={setIsNavbarOpen}/>
     <div className={`${isNavbarOpen ? 'blur-md' : ''} transition-all duration-200`}>
    <Routes>
@@ -22,8 +31,14 @@ const App = () => {
    <Route path="/transport" element={<Transport />} />
    <Route path="/transport/:id" element={<TransportDetail />} />
    <Route path="/blog" element={<Blog />} />
+   <Route path="/contact-us" element={<Contact />} />
+   <Route path="/book/:type/:id" element={<BookingForm />} />
+   <Route path="/register" element={<Register />} />
+   <Route path="/login" element={<Login />} />
+   <Route path="/unauthorized" element={<Unauthorized/>} />
    </Routes>
    </div>
+    </AuthProvider>
     </>
   )
 }

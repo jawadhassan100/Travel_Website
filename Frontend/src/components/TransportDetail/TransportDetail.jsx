@@ -1,5 +1,5 @@
 import  { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom'; // Assuming you're using React Router
+import { Link, useParams } from 'react-router-dom'; // Assuming you're using React Router
 import axios from 'axios';
 import LoadingAnimation from "../LoadingAnimation/LoadingAnimation";
 
@@ -64,11 +64,11 @@ const TransportDetail = () => {
             >
              RS: {transport.price}/Day
             </div>
-            <a href={`/book/${transport._id}`}>
+            <Link to={`/book/transport/${transport._id}`}>
               <div className="text-black rounded-[8px] px-[40px] py-[7px] bg-[#CCF32F]">
                 Book Now
               </div>
-            </a>
+            </Link>
           </div>
         </div>
   

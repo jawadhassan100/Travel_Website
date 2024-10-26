@@ -13,7 +13,7 @@ const Blog = () => {
   }, []); // Empty dependency array ensures this runs only on mount
   return (
    <>
-   <div className="bg-slate-400 pt-16 h-full pb-4">
+   <div className="bg-gray-900 pt-16 h-full pb-4">
     <section className="md:px-[40px] ">
         <div className="bg-[white] rounded-[10px] ">
         <h1 className="text-[40px] font-semibold  mt-[60px] px-[20px]">Our Tours</h1>

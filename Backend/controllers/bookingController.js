@@ -3,7 +3,7 @@ const sendMail = require("../utils/sendMail");
 const bookingEmail = require("../utils/Templates/bookingEmail");
 const Tour = require('../models/Tour'); // Import Tour model
 const Transport = require('../models/Trasnport'); // Import Transport model
-// Create a new booking
+
 // Create a new booking
 exports.createBooking = async (req, res) => {
   try {

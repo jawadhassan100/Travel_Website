@@ -1,6 +1,7 @@
 import  { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom'; // Assuming you're using React Router
 import axios from 'axios';
+import LoadingAnimation from "../LoadingAnimation/LoadingAnimation"
 
 const TourDetail = () => {
   const { id } = useParams(); // Get tour ID from URL parameters
@@ -20,7 +21,9 @@ const TourDetail = () => {
   }, [id]);
 
   if (!tour) {
-    return <div>Loading...</div>; 
+    return  <div className="flex justify-center items-center h-screen">
+    <LoadingAnimation /> {/* Show loading animation */}
+  </div>
   }
 
   return (
@@ -55,7 +58,7 @@ const TourDetail = () => {
           >
            RS: {tour.price}/Day
           </div>
-          <a href={`/book/${tour._id}`}>
+          <a href={`/book/tour/${tour._id}`}>
             <div className="text-black rounded-[8px] px-[40px] py-[7px] bg-[#CCF32F]">
               Book Now
             </div>

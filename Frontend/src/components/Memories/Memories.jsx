@@ -1,11 +1,28 @@
+import { useState } from "react";
 import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
+// Import your images (ensure they are optimized for web)
 import karakuram from "../../assets/karakuram.jpg";
 import sakardu from "../../assets/sakardu.jpg";
 import muzaffarabad from "../../assets/muzaffarabad.jpg";
 import chinaBorder from "../../assets/chinaBorder.jpg";
 import murree from "../../assets/murree.jpg";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+
+// Function to lazy load images
+const LazyImage = ({ src, alt }) => {
+  const [loaded, setLoaded] = useState(false);
+
+  return (
+    <img
+      src={src}
+      alt={alt}
+      className={`h-screen w-full object-cover transition-opacity duration-500 ${loaded ? "opacity-100" : "opacity-0"}`}
+      onLoad={() => setLoaded(true)}
+    />
+  );
+};
 
 const Memories = () => {
   const settings = {
@@ -15,42 +32,38 @@ const Memories = () => {
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 3000,
+    autoplaySpeed: 4000, // Slightly slower autoplay for smoother transitions
     arrows: true,
-    adaptiveHeight: true,
+    lazyLoad: 'ondemand', // Lazy load the slides for better performance
   };
 
   return (
-    <>
-      <div className=" mt-10">
-        <div className="item-center justify-center flex ">
-          <h1 className="text-[30px] px-[10px] lg:[48px] font-[700] text-[#525252;]">
-            OLD MEMORIES
-          </h1>
-        </div> 
-        <div className="h-screen w-full overflow-hidden">
-      <Slider {...settings}>
-        <div>
-          <img src={muzaffarabad} className="h-screen w-full object-cover" alt="Muzaffarabad" />
-        </div>
-        <div>
-          <img src={chinaBorder} className="h-screen w-full object-cover" alt="China Border" />
-        </div>
-        <div>
-          <img src={karakuram} className="h-screen w-full object-cover" alt="Karakuram" />
-        </div>
-        <div>
-          <img src={sakardu} className="h-screen w-full object-cover" alt="Sakardu" />
-        </div>
-        <div>
-          <img src={murree} className="h-screen w-full object-cover" alt="Murree" />
-        </div>
-      </Slider>
-    </div>
-        </div>
-   
-    </>
-  )
-}
+    <div className="mt-5">
+      <div className="text-center flex justify-center">
+        <h1 className="text-[30px] lg:text-[42px] font-bold text-[#525252]">OLD MEMORIES</h1>
+      </div>
 
-export default Memories
+      <div className="h-screen w-full overflow-hidden">
+        <Slider {...settings}>
+          <div>
+            <LazyImage src={muzaffarabad} alt="Muzaffarabad" />
+          </div>
+          <div>
+            <LazyImage src={chinaBorder} alt="China Border" />
+          </div>
+          <div>
+            <LazyImage src={karakuram} alt="Karakuram" />
+          </div>
+          <div>
+            <LazyImage src={sakardu} alt="Sakardu" />
+          </div>
+          <div>
+            <LazyImage src={murree} alt="Murree" />
+          </div>
+        </Slider>
+      </div>
+    </div>
+  );
+};
+
+export default Memories;

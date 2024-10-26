@@ -18,7 +18,7 @@ const Hero = () => {
   };
   return (
     <div className="  bg-image ">
-      <div className="bg-black opacity-75 h-[100vh] ">
+      <div className="bg-black opacity-75 md:h-[100vh] sm:h-[85vh] h-[85vh] ">
       <div className="flex ">
               <div className="lg:w-[896px] lg:px-[46px] md:px-[26px] z-0 w-[350px] sm:w-full sm:text-center pl-3 md:w-[900px] ">
                 <h1 className="text-white sm:text-[35px]  md:text-[55px] text-left   text-[30px] pt-[90px]  sm:pt-[120px] lg:pt-[198px] md:pt-[198px]">
