@@ -69,14 +69,14 @@ exports.login = async (req, res) => {
   };
 
   const token = jwt.sign(payload, process.env.JWT_SECRET, {
-    expiresIn: "3d",
+    expiresIn: "24h",
   });
 
   res.cookie("token", token, {
     httpOnly: true,
     sameSite: "none",
     secure: true,
-    maxAge: 259200000, // 3 days
+    maxAge: 86400000, //*24 hours in milliseconds (24 * 60 * 60 * 1000)
   });
 
   res.status(200).json({

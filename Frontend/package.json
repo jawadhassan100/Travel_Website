@@ -13,6 +13,8 @@
     "axios": "^1.7.7",
     "framer-motion": "^11.11.10",
     "frontend": "file:",
+    "jsonwebtoken": "^9.0.2",
+    "jwt-decode": "^4.0.0",
     "notistack": "^3.0.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",

@@ -1,5 +1,5 @@
 const Contact = require('../models/Contact');
-
+const Notification = require('../models/Notification');
 // Create a new contact form submission
 exports.createContact = async (req, res) => {
   const { name, email, subject, message } = req.body;
@@ -11,6 +11,15 @@ exports.createContact = async (req, res) => {
   try {
     const newContact = new Contact({ name, email, subject, message });
     await newContact.save();
+
+    const notification = new Notification({
+      type: 'Contact',
+      message: `New contact message from ${name}.`,
+      isNewNotifcation: true,
+    });
+
+    await notification.save();
+
 
     res.status(201).json({ message: 'Your message has been sent successfully!' });
   } catch (error) {

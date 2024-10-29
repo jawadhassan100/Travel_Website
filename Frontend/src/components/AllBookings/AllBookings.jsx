@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Sidebar from "../Sidebar/Sidebar";
+import { useSnackbar } from "notistack";
 
 const AllBookings = () => {
   const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [selectedBooking, setSelectedBooking] = useState(null);
+  const { enqueueSnackbar } = useSnackbar(); 
 
   // Fetch all bookings
   useEffect(() => {
@@ -33,12 +35,16 @@ const AllBookings = () => {
   const handleDelete = async (id) => {
     try {
       const token = localStorage.getItem("token");
-      await axios.delete(`http://localhost:6600/booking/${id}`, {
+      const response = await axios.delete(`http://localhost:6600/booking/${id}`, {
         headers: {
           Authorization: token,
         },
       });
       setBookings(bookings.filter((booking) => booking._id !== id));
+      enqueueSnackbar( response.data.message || "Contact Deleted 👍", {
+        variant: "success",
+        autoHideDuration: 1000,
+      });
     } catch (error) {
       console.error("Error deleting booking", error);
     }

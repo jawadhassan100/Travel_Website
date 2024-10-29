@@ -28,6 +28,11 @@ const Sidebar = () => {
           <img src={logo} className="w-[65px]" alt="Logo Image" />
         </div>
         <ul className="flex flex-col space-y-2 w-full lg:pt-20">
+        <li>
+            <Link to="/dashboard" className="block p-2 hover:bg-lime-700 rounded transition duration-200">
+              Dashboard
+            </Link>
+          </li>
           <li>
             <Link to="/create-tour" className="block p-2 hover:bg-lime-700 rounded transition duration-200">
               Create Tour

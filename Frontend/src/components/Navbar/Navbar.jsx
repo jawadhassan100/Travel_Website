@@ -76,11 +76,17 @@ const Navbar = ({ setIsNavbarOpen }) => {
               Blog
             </li>
           </Link>
+          {isAdmin && (
+              <Link to="/dashboard"> <li className="menu-item relative pb-1 hover:after:w-full after:w-0 after:h-[2px] after:bg-white after:absolute after:left-0 after:bottom-0 after:transition-all after:duration-300">
+              Dashboard
+            </li></Link>
+            )}
           <Link to="/contact-us">
             <li className="outline-white outline w-fit px-3 py-0.5 outline-2 rounded-[30px]">
               Contact Us
             </li>
           </Link>
+        
           {isAdmin && (
             <button onClick={handleLogout} className="bg-lime-500 text-white font-semibold px-5 py-1 rounded-sm hover:bg-lime-900 ml-4">
               Logout
@@ -133,6 +139,12 @@ const Navbar = ({ setIsNavbarOpen }) => {
             }}>
             <li className="menu-item">Blog</li>
           </Link>
+          {isAdmin && (
+                <Link to="/dashboard"  onClick={() => {
+                  setIsOpen(false);
+                  setIsNavbarOpen(false); // Ensure blur is removed when closed
+                }}><li className="menu-item">Dashboard</li></Link>
+              )}
           <div className="flex justify-center">
             <Link to="/contact-us"  onClick={() => {
               setIsOpen(false);
@@ -143,6 +155,7 @@ const Navbar = ({ setIsNavbarOpen }) => {
               </li>
             </Link>
           </div>
+          
           <div>
           {isAdmin && (
             <button onClick={handleLogout} className="bg-lime-500 text-white font-semibold px-5 py-1 rounded-sm hover:bg-lime-900 mt-4">

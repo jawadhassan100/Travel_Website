@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Sidebar from "../Sidebar/Sidebar";
+import { useSnackbar } from "notistack";
 
 const AllContact = () => {
   const [contacts, setContacts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [selectedMessage, setSelectedMessage] = useState(null);
+  const { enqueueSnackbar } = useSnackbar(); 
 
   // Fetch all contacts
   useEffect(() => {
@@ -32,12 +34,16 @@ const AllContact = () => {
   const handleDelete = async (id) => {
     try {
       const token = localStorage.getItem("token");
-      await axios.delete(`http://localhost:6600/contact/delete-contact/${id}`, {
+     const response=  await axios.delete(`http://localhost:6600/contact/delete-contact/${id}`, {
         headers: {
           Authorization: token,
         },
       });
       setContacts(contacts.filter((contact) => contact._id !== id));
+      enqueueSnackbar( response.data.message || "Contact Deleted 👍", {
+        variant: "success",
+        autoHideDuration: 1000,
+      });
     } catch (error) {
       console.error("Error deleting contact", error);
     }

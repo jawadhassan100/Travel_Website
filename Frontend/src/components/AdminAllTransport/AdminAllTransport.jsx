@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { useSnackbar } from 'notistack';
 
 const AdminAllTransport = () => {
   const [trasnport, setTrasnport] = useState([]);
+  const { enqueueSnackbar } = useSnackbar(); 
 
   useEffect(() => {
     const fetchTours = async () => {
@@ -26,12 +28,16 @@ const AdminAllTransport = () => {
  
   const handleDelete = async (transportId) => {
     try {
-      await axios.delete(`http://localhost:6600/trasnport/${transportId}`, {
+   const response =  await axios.delete(`http://localhost:6600/trasnport/${transportId}`, {
         headers: {
           Authorization: localStorage.getItem('token'),
         },
       });
       setTrasnport(trasnport.filter(trasnport => trasnport._id !== transportId)); // Update state
+      enqueueSnackbar( response.data.message || "Transport Deleted Successfully", {
+        variant: "success",
+        autoHideDuration: 1000,
+      });
     } catch (error) {
       console.error('Error deleting tour', error);
     }

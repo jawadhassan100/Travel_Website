@@ -35,7 +35,7 @@ const Dashboard = () => {
     <>
     <div className="flex">
       <Sidebar />
-      <div className="flex-1  bg-gray-900 h-full pb-5 pt-24 lg:pl-[250px]">
+      <div className="flex-1  bg-gray-900 h-full pb-10 pt-24 lg:pl-[250px]">
         <div className="flex flex-col items-center justify-center p-5 text-center">
           <h1 className="text-4xl font-extrabold text-white mb-2">Admin Dashboard</h1>
           <p className="text-lg text-gray-500">Overview of your platform&#39;s data</p>

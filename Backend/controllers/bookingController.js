@@ -3,6 +3,8 @@ const sendMail = require("../utils/sendMail");
 const bookingEmail = require("../utils/Templates/bookingEmail");
 const Tour = require('../models/Tour'); // Import Tour model
 const Transport = require('../models/Trasnport'); // Import Transport model
+const Notification = require('../models/Notification');
+
 
 // Create a new booking
 exports.createBooking = async (req, res) => {
@@ -17,6 +19,7 @@ exports.createBooking = async (req, res) => {
     let totalPrice = 0;
     let tourName = '';
     let transportType = '';
+    let bookingMessage = '';
 
     // Fetch tour and transport details if they exist
     if (tourId) {
@@ -26,6 +29,7 @@ exports.createBooking = async (req, res) => {
       }
       totalPrice += tour.price; // Add tour price
       tourName = tour.cityName;  // Get tour name
+      bookingMessage += `Tour booked: ${tourName}. `;
     }
 
     if (transportId) {
@@ -35,6 +39,7 @@ exports.createBooking = async (req, res) => {
       }
       totalPrice += transport.price; // Add transport price
       transportType = transport.vehicleName; // Get transport type
+      bookingMessage += `Transport booked: ${transportType}.`;
     }
 
     const newBooking = new Booking({
@@ -50,6 +55,13 @@ exports.createBooking = async (req, res) => {
 
     await newBooking.save();
 
+     // Create a notification for the new booking
+     const notification = new Notification({
+      type: 'Booking',
+      message:  `New booking created by ${userName}. ${bookingMessage}`,
+      isNewisNewNotifcation: true,
+    });
+    await notification.save();
     // Prepare email details
     const subject = "Booking Confirmation";
     const htmlContent = bookingEmail(userName, tourName, transportType, totalPrice);

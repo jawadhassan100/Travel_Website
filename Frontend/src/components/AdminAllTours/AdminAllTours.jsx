@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { useSnackbar } from 'notistack';
 
 const AdminAllTours = () => {
   const [tours, setTours] = useState([]);
-
+  const { enqueueSnackbar } = useSnackbar(); 
   useEffect(() => {
     const fetchTours = async () => {
       const token = localStorage.getItem('token'); // Assuming you have stored the token
@@ -26,12 +27,17 @@ const AdminAllTours = () => {
 
   const handleDelete = async (tourId) => {
     try {
-      await axios.delete(`http://localhost:6600/tour/${tourId}`, {
+     const response =  await axios.delete(`http://localhost:6600/tour/${tourId}`, {
         headers: {
           Authorization: localStorage.getItem('token'),
         },
       });
+
       setTours(tours.filter(tour => tour._id !== tourId)); // Update state
+      enqueueSnackbar( response.data.message || "Tour Deleted Successfully", {
+        variant: "success",
+        autoHideDuration: 1000,
+      });
     } catch (error) {
       console.error('Error deleting tour', error);
     }

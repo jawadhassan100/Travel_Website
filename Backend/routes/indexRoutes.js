@@ -6,6 +6,7 @@ const transportRoutes = require('./transportRoutes')
 const bookingRoutes = require('./bookingRoutes')
 const contactRoutes = require('./contactRoutes');
 const dashboardRoutes = require('./dashboardRoutes')
+const notificationRoutes = require('./notificationRoutes')
 // Use the user routes
 router.use('/api', authRoutes);
 router.use('/tour', tourRoutes);
@@ -13,4 +14,5 @@ router.use('/trasnport', transportRoutes);
 router.use('/booking', bookingRoutes);
 router.use('/contact', contactRoutes);
 router.use('/dashboard', dashboardRoutes);
+router.use('/notification' , notificationRoutes)
 module.exports = router;

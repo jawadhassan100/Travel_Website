@@ -13,7 +13,13 @@ const TransportDetail = () => {
       const fetchTour = async () => {
         try {
           const response = await axios.get(`http://localhost:6600/trasnport/${id}`); // Adjust the API route if needed
-          setTransport(response.data); // Store fetched tour data
+          
+          const transportData = response.data;
+            // Parse 'about' field if it's a stringified JSON array
+            if (typeof transportData.about === 'string') {
+              transportData.about = JSON.parse(transportData.about);
+            }
+            setTransport(transportData)
           setLoading(false); 
         } catch (error) {
           console.error('Error fetching trasnport:', error);
@@ -75,7 +81,15 @@ const TransportDetail = () => {
         <div className="bg-[#F4F4F4] lg:pl-[53px] mt-[20px]">
           <h2 className="text-[27px] pt-[20px] font-semibold">About This Trip</h2>
           <div className="lg:w-[55%] leading-[24.2px] pb-[20px]">
-            {transport.about}
+            {Array.isArray(transport.about) ? (
+              <ul className="list-disc pl-5">
+                {transport.about.map((point, index) => (
+                  <li key={index}>{point}</li>
+                ))}
+              </ul>
+            ) : (
+              <p>{transport.about}</p>
+            )}
           </div>
         </div>
   
