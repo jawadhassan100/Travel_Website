@@ -1,16 +1,18 @@
 import { useState, useContext } from "react";
 import { CiMenuFries } from "react-icons/ci";
 import { TfiClose } from "react-icons/tfi";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assets/logo.svg";
 import { AuthContext } from "../AuthContext/AuthContext";
 import axios from "axios";
 import { useSnackbar } from "notistack";
 
+
 const Navbar = ({ setIsNavbarOpen }) => {
   const [isOpen, setIsOpen] = useState(false);
   const { isAdmin, setIsAdmin } = useContext(AuthContext);
   const { enqueueSnackbar } = useSnackbar();
+  const navigate = useNavigate()
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -30,6 +32,9 @@ const Navbar = ({ setIsNavbarOpen }) => {
         localStorage.removeItem('isAdmin');
         setIsAdmin(false);
         enqueueSnackbar(response.data.msg, { variant: "success", autoHideDuration: 1000 });
+        setTimeout(()=>{
+          navigate("/")
+        }, 2000)
       }
     } catch (error) {
       enqueueSnackbar(error.response?.data?.msg || error.msg, { variant: "error", autoHideDuration: 1000 });
