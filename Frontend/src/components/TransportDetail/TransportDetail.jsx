@@ -2,7 +2,7 @@ import  { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom'; // Assuming you're using React Router
 import axios from 'axios';
 import LoadingAnimation from "../LoadingAnimation/LoadingAnimation";
-
+import "./TransportDetail.css";
 const TransportDetail = () => {
     const { id } = useParams(); // Get tour ID from URL parameters
     const [transport, setTransport] = useState(null); // State to hold tour data
@@ -94,13 +94,13 @@ const TransportDetail = () => {
         </div>
   
         <div className="bg-[#F4F4F4] mt-[20px] py-[20px]">
-          <div className="grid lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1 gap-3 px-[44px] my-[20px]">
+          <div className="transport-image-grid px-[44px] my-[20px]">
           {transport.vehicleImages.map((image, index) => (
                 <div key={index} className="relative">
                   <img
                     src={image} // Use image directly here
                     alt={`Vehicle image ${index + 1}`} // Add alt text for accessibility
-                    className="w-[438px] h-[250px]"
+                    className="transport-image"
                   />
               </div>
             ))}

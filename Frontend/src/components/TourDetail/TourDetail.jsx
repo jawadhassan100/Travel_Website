@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom'; // Assuming you're using React Router
 import axios from 'axios';
 import LoadingAnimation from "../LoadingAnimation/LoadingAnimation"
+import "./TourDetail.css"
 
 const TourDetail = () => {
   const { id } = useParams(); // Get tour ID from URL parameters
@@ -97,20 +98,21 @@ const TourDetail = () => {
         </div>
 
         <div className="bg-[#F4F4F4] mt-[20px] py-[20px]">
-          <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-3 px-[44px] my-[20px]">
-            {tour.famousPlaces.map((place, index) => (
-              <div key={index} className="relative">
-                <img
-                  src={place.image}
-                  alt={place.name}
-                  className="w-[438px] h-[250px]"
-                />
-                <p className="absolute inset-0 flex items-end justify-center text-white font-[400] text-[32px] mb-[20px]">
-                  {place.name}
-                </p>
-              </div>
-            ))}
-          </div>
+        <div className="image-grid px-[44px] my-[20px]">
+  {tour.famousPlaces.map((place, index) => (
+    <div key={index} className="relative">
+      <img
+        src={place.image}
+        alt={place.name}
+        className="tour-image"
+      />
+      <p className="absolute inset-0 flex items-end justify-center text-white font-[400] text-[32px] mb-[20px]">
+        {place.name}
+      </p>
+    </div>
+  ))}
+</div>
+
         </div>
       </div>
     </>

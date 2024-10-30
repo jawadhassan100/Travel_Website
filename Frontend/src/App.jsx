@@ -24,6 +24,7 @@ import EditTour from "./components/EditTour/EditTour";
 import EditTransport from "./components/EditTransport/EditTransport";
 import { jwtDecode } from 'jwt-decode';
 import { useNavigate } from 'react-router-dom';
+import Notification from "./components/Notification/Notification";
 
 const App = () => {
   const [isNavbarOpen, setIsNavbarOpen] = useState(false);
@@ -88,6 +89,7 @@ const App = () => {
             <Route path="/create-tour" element={<AdminRoutes element={<CreateTour />} />} />
             <Route path="/edit-tour/:id" element={<AdminRoutes element={<EditTour />} />} />
             <Route path="/edit-transport/:id" element={<AdminRoutes element={<EditTransport />} />} />
+            <Route path="/notification" element={<AdminRoutes element={<Notification />} />} />
           </Routes>
         </div>
       </AuthProvider>

@@ -1,0 +1,12 @@
+.tour-image {
+    width: 100%; /* Ensures the image takes the full width of the container */
+    height: 250px; /* Set height based on your design */
+    object-fit: cover; /* This will crop the image to fit the container */
+    border-radius: 8px; /* Optional: adds rounded corners */
+  }
+
+  .image-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Adjust min width to fit design */
+    gap: 1rem; /* Space between images */
+  }

@@ -59,7 +59,7 @@ exports.createBooking = async (req, res) => {
      const notification = new Notification({
       type: 'Booking',
       message:  `New booking created by ${userName}. ${bookingMessage}`,
-      isNewisNewNotifcation: true,
+      isNewisNewNotification: true,
     });
     await notification.save();
     // Prepare email details

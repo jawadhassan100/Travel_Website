@@ -15,7 +15,7 @@ exports.createContact = async (req, res) => {
     const notification = new Notification({
       type: 'Contact',
       message: `New contact message from ${name}.`,
-      isNewNotifcation: true,
+      isNewNotification: true,
     });
 
     await notification.save();
