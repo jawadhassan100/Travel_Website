@@ -2,11 +2,10 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Sidebar from "../Sidebar/Sidebar";
 import { useSnackbar } from "notistack";
+import LoadingAnimation from "../LoadingAnimation/LoadingAnimation";
 
 const AllContact = () => {
-  const [contacts, setContacts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
+  const [contacts, setContacts] = useState([]);;
   const [selectedMessage, setSelectedMessage] = useState(null);
   const { enqueueSnackbar } = useSnackbar(); 
 
@@ -22,10 +21,8 @@ const AllContact = () => {
         });
         setContacts(response.data);
       } catch (err) {
-        setError("There was a problem fetching the contacts" ,err);
-      } finally {
-        setLoading(false);
-      }
+        console.error("There was a problem fetching the contacts" ,err);
+      } 
     };
     fetchContacts();
   }, []);
@@ -59,8 +56,15 @@ const AllContact = () => {
     setSelectedMessage(null);
   };
 
-  if (loading) return <p className="text-white text-center">Loading contacts...</p>;
-  if (error) return <p className="text-red-500 text-center">{error}</p>;
+  if (!contacts) {
+    return (
+      <div className="flex justify-center bg-gray-800 items-center h-screen">
+        <LoadingAnimation /> {/* Show loading animation */}
+      </div>
+    );
+  }
+
+
 
   return (
     <div className="flex bg-gray-900 min-h-screen text-white">

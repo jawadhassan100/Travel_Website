@@ -5,6 +5,7 @@ import HeroImg2 from "../../assets/himg2.png";
 import HeroImg3 from "../../assets/himg3.png";
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const Hero = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -38,7 +39,9 @@ const Hero = () => {
             <div
                   className="sm:text-center flex bg-lime-500 text-white hover:bg-white hover:text-lime-500 transition duration- rounded-full w-[180px] px-[30px] py-[10px] mt-[10px] mb-[20px]"
                 >
-                  <a href="#" className="px-[5xpx]  font-semibold flex items-center gap-3 ">Take a Trip  <FaArrowRightLong/></a>
+                  <Link to="/blog">
+                  <p  className="px-[5xpx]  font-semibold flex items-center gap-3 ">Take a Trip  <FaArrowRightLong/></p>
+                  </Link>
                  
                 </div>
           </motion.div>

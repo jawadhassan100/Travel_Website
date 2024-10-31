@@ -27,7 +27,7 @@ const Tours = () => {
   }, []);
 
   if (!tours) {
-    return  <div className="flex justify-center items-center h-screen">
+    return  <div className="flex justify-center bg-gray-800 items-center h-screen">
     <LoadingAnimation /> {/* Show loading animation */}
   </div>
   }

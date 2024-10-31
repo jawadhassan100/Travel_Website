@@ -1,6 +1,7 @@
 import  { useState, useEffect } from "react";
 import axios from "axios";
 import Sidebar from "../Sidebar/Sidebar";
+import LoadingAnimation from "../LoadingAnimation/LoadingAnimation";
 
 const Notifications = () => {
   const [notifications, setNotifications] = useState([]);
@@ -57,6 +58,14 @@ const Notifications = () => {
    }
   }
 
+  if (!notifications) {
+    return (
+      <div className="flex justify-center bg-gray-800 items-center h-screen">
+        <LoadingAnimation /> {/* Show loading animation */}
+      </div>
+    );
+  }
+
   return (
     <div className="flex bg-gray-900 min-h-screen text-white">
         <Sidebar/>
@@ -78,7 +87,7 @@ const Notifications = () => {
             className="relative  p-4 border border-gray-700 rounded-lg bg-gray-800"
           >
              <button
-              className="absolute top-2 right-3 text-red-500 hover:text-red-600"
+              className="absolute top-2 right-3 font-extrabold bg-red-500 px-2 rounded-sm text-white"
               onClick={() => handleDelete(notification._id)}
             >
               ✕

@@ -17,10 +17,10 @@
     margin-bottom: 30px;
     position: relative;
   }
-  
+
   .loadingspinner div {
     display: inline-block;
-    background: darkorange;
+    background: #CCF32F;
       /*background: var(--text-color);*/
       /*box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);*/
     border: none;

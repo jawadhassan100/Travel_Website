@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import AdminAllTours from "../AdminAllTours/AdminAllTours";
 import AdminAllTransport from "../AdminAllTransport/AdminAllTransport";
+import LoadingAnimation from "../LoadingAnimation/LoadingAnimation"
 
 const Dashboard = () => {
   const [data, setData] = useState({
@@ -34,6 +35,14 @@ const Dashboard = () => {
 
     fetchData();
   }, []);
+
+  if (!data) {
+    return (
+      <div className="flex justify-center bg-gray-800 items-center h-screen">
+        <LoadingAnimation /> {/* Show loading animation */}
+      </div>
+    );
+  }
 
   return (
     <>

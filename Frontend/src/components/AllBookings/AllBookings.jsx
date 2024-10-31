@@ -2,11 +2,10 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Sidebar from "../Sidebar/Sidebar";
 import { useSnackbar } from "notistack";
+import LoadingAnimation from "../LoadingAnimation/LoadingAnimation";
 
 const AllBookings = () => {
   const [bookings, setBookings] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
   const [selectedBooking, setSelectedBooking] = useState(null);
   const { enqueueSnackbar } = useSnackbar(); 
 
@@ -21,11 +20,8 @@ const AllBookings = () => {
           },
         });
         setBookings(response.data);
-        
       } catch (err) {
-        setError("There was a problem fetching the bookings" , err);
-      } finally {
-        setLoading(false);
+        console.error("There was a problem fetching the bookings" , err);
       }
     };
     fetchBookings();
@@ -68,8 +64,13 @@ const AllBookings = () => {
     return `${month}/${day}/${year}`; // Return formatted date
   };
 
-  if (loading) return <p className="text-white text-center">Loading bookings...</p>;
-  if (error) return <p className="text-red-500 text-center">{error}</p>;
+  if (!bookings) {
+    return (
+      <div className="flex justify-center bg-gray-800 items-center h-screen">
+        <LoadingAnimation /> {/* Show loading animation */}
+      </div>
+    );
+  }
 
   return (
     <div className="flex bg-gray-900 min-h-screen text-white">
