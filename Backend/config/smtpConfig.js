@@ -4,7 +4,9 @@ dotenv.config({ path: "./config/.env" })
 
 const createTransporter = () => {
     return nodemailer.createTransport({
-        service: 'gmail', // Change this to your email service provider if needed
+        host: 'smtp.hostinger.com', // Hostinger SMTP server
+        port: 465, // SSL port for Hostinger
+        secure: true, 
         auth: {
             user: process.env.EMAIL_USER,
             pass: process.env.EMAIL_PASS
