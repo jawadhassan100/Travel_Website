@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import LoadingAnimation from "../LoadingAnimation/LoadingAnimation";
+import config from '../../config/config';
 
-
+const BASE_URL = config.BASE_URL;
 const Transport = () => {
   const [transport, setTransport] = useState([]);
   const [loading, setLoading] = useState(true); // New loading state
@@ -17,7 +18,7 @@ const Transport = () => {
     // Fetch all tours from the backend
     const fetchTours = async () => {
       try {
-        const response = await axios.get("http://localhost:6600/trasnport"); // Assuming the backend API is at this route
+        const response = await axios.get(`${BASE_URL}/trasnport`); // Assuming the backend API is at this route
         setTransport(response.data);
         setLoading(false); // Data has been loaded, so hide loader
       } catch (error) {

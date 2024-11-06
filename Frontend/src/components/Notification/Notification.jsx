@@ -2,7 +2,9 @@ import  { useState, useEffect } from "react";
 import axios from "axios";
 import Sidebar from "../Sidebar/Sidebar";
 import LoadingAnimation from "../LoadingAnimation/LoadingAnimation";
+import config from '../../config/config';
 
+const BASE_URL = config.BASE_URL;
 const Notifications = () => {
   const [notifications, setNotifications] = useState([]);
   const [unreadCount, setUnreadCount] = useState(0);
@@ -16,7 +18,7 @@ const Notifications = () => {
   const fetchNotifications = async () => {
     try {
         const token = localStorage.getItem('token')
-      const response = await axios.get("http://localhost:6600/notification" ,{
+      const response = await axios.get(`${BASE_URL}/notification` ,{
         headers: { Authorization: `${token}` }
       });
       setNotifications(response.data.notifications);
@@ -29,7 +31,7 @@ const Notifications = () => {
   const markAsRead = async (id) => {
     try {
         const token = localStorage.getItem('token')
-      await axios.patch(`http://localhost:6600/notification/${id}`,{
+      await axios.patch(`${BASE_URL}/notification/${id}`,{
         headers: { Authorization: `${token}` }
       });
       setNotifications(
@@ -46,7 +48,7 @@ const Notifications = () => {
   const handleDelete = async (id) => {
    try {
     const token = localStorage.getItem("token")
-    await axios.delete(`http://localhost:6600/notification/${id}`,{
+    await axios.delete(`${BASE_URL}/notification/${id}`,{
         headers: {Authorization: `${token}`}
     })
     setNotifications(

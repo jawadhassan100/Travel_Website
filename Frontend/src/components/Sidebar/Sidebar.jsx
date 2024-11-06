@@ -3,7 +3,9 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import logo from "../../assets/logo.svg";
+import config from '../../config/config';
 
+const BASE_URL = config.BASE_URL;
 const Sidebar = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [unreadCount, setUnreadCount] = useState(0);
@@ -17,7 +19,7 @@ const Sidebar = () => {
     const fetchUnreadCount = async () => {
       try {
         const token = localStorage.getItem('token')
-        const response = await axios.get("http://localhost:6600/notification",{
+        const response = await axios.get(`${BASE_URL}/notification`,{
           headers: {Authorization: `${token}`}
         });
         console.log(response.data); 

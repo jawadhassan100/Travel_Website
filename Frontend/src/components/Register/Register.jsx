@@ -2,7 +2,9 @@ import  { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useSnackbar } from "notistack";
+import config from '../../config/config';
 
+const BASE_URL = config.BASE_URL;
 const Register = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -12,7 +14,7 @@ const Register = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://localhost:6600/api/register', {
+      const response = await axios.post(`${BASE_URL}/api/register`, {
         email,
         password,
       });

@@ -2,7 +2,9 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { useSnackbar } from 'notistack';
+import config from '../../config/config';
 
+const BASE_URL = config.BASE_URL;
 const AdminAllTransport = () => {
   const [trasnport, setTrasnport] = useState([]);
   const { enqueueSnackbar } = useSnackbar(); 
@@ -11,7 +13,7 @@ const AdminAllTransport = () => {
     const fetchTours = async () => {
       const token = localStorage.getItem('token'); 
       try {
-        const response = await axios.get('http://localhost:6600/trasnport', {
+        const response = await axios.get(`${BASE_URL}/trasnport`, {
           headers: {
             Authorization: token,
           },
@@ -28,7 +30,7 @@ const AdminAllTransport = () => {
  
   const handleDelete = async (transportId) => {
     try {
-   const response =  await axios.delete(`http://localhost:6600/trasnport/${transportId}`, {
+   const response =  await axios.delete(`${BASE_URL}/trasnport/${transportId}`, {
         headers: {
           Authorization: localStorage.getItem('token'),
         },

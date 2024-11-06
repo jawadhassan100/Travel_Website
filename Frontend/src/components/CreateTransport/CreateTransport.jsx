@@ -2,7 +2,9 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Sidebar from '../Sidebar/Sidebar';
 import { useSnackbar } from 'notistack';
+import config from '../../config/config';
 
+const BASE_URL = config.BASE_URL
 const CreateTransport = () => {
   const [vehicleData, setVehicleData] = useState({
     vehicleImage: null,
@@ -69,7 +71,7 @@ const CreateTransport = () => {
 
     try {
       const token = localStorage.getItem("token");
-      const response = await axios.post('http://localhost:6600/trasnport', formData, {
+      const response = await axios.post(`${BASE_URL}/trasnport`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
           Authorization: token,

@@ -3,8 +3,9 @@ import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
 import Sidebar from '../Sidebar/Sidebar';
 import { useSnackbar } from 'notistack';
+import config from '../../config/config';
 
-
+const BASE_URL = config.BASE_URL;
 const EditTransport = () => {
   const { id } = useParams(); // Get vehicle ID from URL parameters
   const navigate = useNavigate(); // To navigate after editing
@@ -28,7 +29,7 @@ const EditTransport = () => {
     const fetchVehicle = async () => {
       const token = localStorage.getItem('token'); // Assuming you have stored the token
       try {
-        const response = await axios.get(`http://localhost:6600/trasnport/${id}`, {
+        const response = await axios.get(`${BASE_URL}/trasnport/${id}`, {
           headers: {
             Authorization: token,
           },
@@ -110,7 +111,7 @@ const EditTransport = () => {
     }
   });
     try {
-    const response = await axios.put(`http://localhost:6600/trasnport/${id}`, formData, {
+    const response = await axios.put(`${BASE_URL}/trasnport/${id}`, formData, {
         headers: {
           Authorization: token,
           'Content-Type': 'multipart/form-data', // Ensure FormData content type

@@ -1,7 +1,9 @@
 import { useState } from "react";
 import axios from "axios";
 import { useSnackbar } from "notistack";
+import config from '../../config/config';
 
+const BASE_URL = config.BASE_URL;
 const Contact = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -21,7 +23,7 @@ const Contact = () => {
 
 
     try {
-      await axios.post("http://localhost:6600/contact/create-contact", formData);
+      await axios.post(`${BASE_URL}/contact/create-contact`, formData);
       setFormData({
         name: "",
         email: "",

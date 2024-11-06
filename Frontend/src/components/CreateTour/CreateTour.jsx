@@ -2,7 +2,9 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Sidebar from '../Sidebar/Sidebar';
 import { useSnackbar } from 'notistack';
+import config from '../../config/config';
 
+const BASE_URL = config.BASE_URL;
 const CreateTour = () => {
   const [tourData, setTourData] = useState({
     cityName: '',
@@ -84,7 +86,7 @@ const CreateTour = () => {
 
     try {
       const token = localStorage.getItem("token");
-      const response = await axios.post('http://localhost:6600/tour', formData, {
+      const response = await axios.post(`${BASE_URL}/tour`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
           Authorization: token,

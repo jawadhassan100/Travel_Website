@@ -4,7 +4,9 @@ import axios from 'axios';
 import AdminAllTours from "../AdminAllTours/AdminAllTours";
 import AdminAllTransport from "../AdminAllTransport/AdminAllTransport";
 import LoadingAnimation from "../LoadingAnimation/LoadingAnimation"
+import config from '../../config/config';
 
+const BASE_URL = config.BASE_URL;
 const Dashboard = () => {
   const [data, setData] = useState({
     totalTours: 0,
@@ -21,7 +23,7 @@ const Dashboard = () => {
     const fetchData = async () => {
       const token = localStorage.getItem('token');
       try {
-        const response = await axios.get('http://localhost:6600/dashboard', {
+        const response = await axios.get(`${BASE_URL}/dashboard`, {
           withCredentials: true,
           headers: {
             Authorization: `${token}`,

@@ -5,6 +5,9 @@ import LoadingAnimation from "../LoadingAnimation/LoadingAnimation";
 import "./TourDetail.css";
 import Reviews from "../../components/Reviews/Reviews"
 import Footer from "../../components/Footer/Footer"
+import config from '../../config/config';
+
+const BASE_URL = config.BASE_URL;
 const TourDetail = () => {
   const { id } = useParams(); // Get tour ID from URL parameters
   const [tour, setTour] = useState(null); // State to hold tour data
@@ -13,7 +16,7 @@ const TourDetail = () => {
     // Fetch tour details from backend by ID
     const fetchTour = async () => {
       try {
-        const response = await axios.get(`http://localhost:6600/tour/${id}`); // Adjust the API route if needed
+        const response = await axios.get(`${BASE_URL}/tour/${id}`); // Adjust the API route if needed
         const transportData = response.data;
 
         // Log the fetched data

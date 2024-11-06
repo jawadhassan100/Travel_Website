@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import config from '../../config/config';
 
+const BASE_URL = config.BASE_URL;
 const ToursPage = () => {
   const [tours, setTours] = useState([]);
 
@@ -9,7 +11,7 @@ const ToursPage = () => {
     // Fetch all tours from the backend
     const fetchTours = async () => {
       try {
-        const response = await axios.get("http://localhost:6600/tour"); 
+        const response = await axios.get(`${BASE_URL}/tour`); 
         setTours(response.data);
       } catch (error) {
         console.error("Error fetching tours:", error);

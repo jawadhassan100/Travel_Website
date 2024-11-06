@@ -6,7 +6,9 @@ import logo from "../../assets/logo.svg";
 import { AuthContext } from "../AuthContext/AuthContext";
 import axios from "axios";
 import { useSnackbar } from "notistack";
+import config from '../../config/config';
 
+const BASE_URL = config.BASE_URL;
 
 const Navbar = ({ setIsNavbarOpen }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -22,7 +24,7 @@ const Navbar = ({ setIsNavbarOpen }) => {
   const handleLogout = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.post('http://localhost:6600/api/logout', {}, {
+      const response = await axios.post(`${BASE_URL}/api/logout`, {}, {
         withCredentials: true,
         headers: { Authorization: `${token}` },
       });

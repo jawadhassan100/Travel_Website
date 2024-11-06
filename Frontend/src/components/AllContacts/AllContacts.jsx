@@ -3,7 +3,9 @@ import axios from "axios";
 import Sidebar from "../Sidebar/Sidebar";
 import { useSnackbar } from "notistack";
 import LoadingAnimation from "../LoadingAnimation/LoadingAnimation";
+import config from '../../config/config';
 
+const BASE_URL = config.BASE_URL;
 const AllContact = () => {
   const [contacts, setContacts] = useState([]);;
   const [selectedMessage, setSelectedMessage] = useState(null);
@@ -14,7 +16,7 @@ const AllContact = () => {
     const fetchContacts = async () => {
       try {
         const token = localStorage.getItem("token");
-        const response = await axios.get("http://localhost:6600/contact/all-contact", {
+        const response = await axios.get(`${BASE_URL}/contact/all-contact`, {
           headers: {
             Authorization: token,
           },
@@ -31,7 +33,7 @@ const AllContact = () => {
   const handleDelete = async (id) => {
     try {
       const token = localStorage.getItem("token");
-     const response=  await axios.delete(`http://localhost:6600/contact/delete-contact/${id}`, {
+     const response=  await axios.delete(`${BASE_URL}/contact/delete-contact/${id}`, {
         headers: {
           Authorization: token,
         },

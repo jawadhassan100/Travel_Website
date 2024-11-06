@@ -3,7 +3,9 @@ import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
 import Sidebar from '../Sidebar/Sidebar';
 import { useSnackbar } from 'notistack';
+import config from '../../config/config';
 
+const BASE_URL = config.BASE_URL;
 const EditTour = () => {
   const { id } = useParams(); // Get tour ID from URL parameters
   const navigate = useNavigate(); // To navigate after editing
@@ -24,7 +26,7 @@ const EditTour = () => {
     const fetchTour = async () => {
       const token = localStorage.getItem('token'); // Assuming you have stored the token
       try {
-        const response = await axios.get(`http://localhost:6600/tour/${id}`, {
+        const response = await axios.get(`${BASE_URL}/tour/${id}`, {
           headers: {
             Authorization: token,
           },
@@ -94,7 +96,7 @@ const EditTour = () => {
     });
 
     try {
-     const response =  await axios.put(`http://localhost:6600/tour/${id}`, formData, {
+     const response =  await axios.put(`${BASE_URL}/tour/${id}`, formData, {
         headers: {
           Authorization: token,
           'Content-Type': 'multipart/form-data', // Important for file uploads

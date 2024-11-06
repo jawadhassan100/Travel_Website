@@ -3,7 +3,9 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useSnackbar } from "notistack";
 import { AuthContext } from "../AuthContext/AuthContext"; // Import AuthContext
+import config from '../../config/config';
 
+const BASE_URL = config.BASE_URL;
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -16,7 +18,7 @@ const Login = () => {
   
     try {
       const response = await axios.post(
-        "http://localhost:6600/api/login",
+       `${BASE_URL}/api/login`,
         {
           email,
           password,

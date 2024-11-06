@@ -2,7 +2,9 @@
     import { useState } from 'react';
     import axios from 'axios';
     import { useSnackbar } from "notistack";
+    import config from '../../config/config';
 
+    const BASE_URL = config.BASE_URL;
     const BookingForm = () => {
     const { type, id } = useParams(); // type will be 'tour' or 'transport' based on the URL
     const [userName, setUserName] = useState('');
@@ -23,7 +25,7 @@
             [type === 'tour' ? 'tourId' : 'transportId']: id // Dynamically set the ID based on type
         };
 
-        const response = await axios.post('http://localhost:6600/booking', bookingData);
+        const response = await axios.post(`${BASE_URL}/booking`, bookingData);
         if (response.status === 201) {
           enqueueSnackbar( response.data.message || "Booked Successfully", {
             variant: "success",

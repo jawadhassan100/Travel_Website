@@ -3,6 +3,9 @@ import { Link, useParams } from 'react-router-dom'; // Assuming you're using Rea
 import axios from 'axios';
 import LoadingAnimation from "../LoadingAnimation/LoadingAnimation";
 import "./TransportDetail.css";
+import config from '../../config/config';
+
+const BASE_URL = config.BASE_URL;
 const TransportDetail = () => {
     const { id } = useParams(); // Get tour ID from URL parameters
     const [transport, setTransport] = useState(null); // State to hold tour data
@@ -12,7 +15,7 @@ const TransportDetail = () => {
       // Fetch tour details from backend by ID
       const fetchTour = async () => {
         try {
-          const response = await axios.get(`http://localhost:6600/trasnport/${id}`); // Adjust the API route if needed
+          const response = await axios.get(`${BASE_URL}/trasnport/${id}`); // Adjust the API route if needed
           
           const transportData = response.data;
             // Parse 'about' field if it's a stringified JSON array

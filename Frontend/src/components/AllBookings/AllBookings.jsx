@@ -3,7 +3,9 @@ import axios from "axios";
 import Sidebar from "../Sidebar/Sidebar";
 import { useSnackbar } from "notistack";
 import LoadingAnimation from "../LoadingAnimation/LoadingAnimation";
+import config from '../../config/config';
 
+const BASE_URL = config.BASE_URL;
 const AllBookings = () => {
   const [bookings, setBookings] = useState([]);
   const [selectedBooking, setSelectedBooking] = useState(null);
@@ -14,7 +16,7 @@ const AllBookings = () => {
     const fetchBookings = async () => {
       try {
         const token = localStorage.getItem("token");
-        const response = await axios.get("http://localhost:6600/booking", {
+        const response = await axios.get(`${BASE_URL}/booking`, {
           headers: {
             Authorization: token,
           },
@@ -31,7 +33,7 @@ const AllBookings = () => {
   const handleDelete = async (id) => {
     try {
       const token = localStorage.getItem("token");
-      const response = await axios.delete(`http://localhost:6600/booking/${id}`, {
+      const response = await axios.delete(`${BASE_URL}/booking/${id}`, {
         headers: {
           Authorization: token,
         },
