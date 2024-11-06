@@ -10,3 +10,25 @@
     grid-template-columns: repeat(auto-fit, minmax(500px, 1fr)); /* Adjust min width to fit design */
     gap: 1rem; /* Space between images */
   }
+
+  
+@media screen and (max-width:426px) {
+  .transport-image {
+    width: 80%;
+    margin-left: -30px;
+  }
+}
+
+@media screen and (max-width:376px) {
+  .transport-image {
+    width: 70%;
+    margin-left: -30px;
+  }
+}
+
+@media screen and (max-width:321px) {
+  .transport-image {
+    width: 62%;
+    margin-left: -40px;
+  }
+}
