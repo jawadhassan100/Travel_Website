@@ -15,6 +15,7 @@ router.post(
   "/",
   upload.fields([
     { name: "vehicleImage", maxCount: 1 }, // Main vehicle image
+    { name: "vehicleDetailImage", maxCount: 1 }, // deatil vehicle image
     { name: "vehicleImages", maxCount: 5 }, // Up to 5 additional images
   ]),
   auth, adminAuth, addVehicle
@@ -26,6 +27,7 @@ router.put(
   "/:id",
   upload.fields([
     { name: "vehicleImage", maxCount: 1 },
+    { name: "vehicleDetailImage", maxCount: 1 },
     { name: "vehicleImages", maxCount: 5 },
   ]),
   auth, adminAuth ,updateVehicle

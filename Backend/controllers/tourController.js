@@ -10,12 +10,15 @@ exports.addTour = async (req, res) => {
       image: req.files[`famousPlaces[${index}][image]`][0].path // Cloudinary image URL
     }));
 
+    const tourDetailImage = req.files.tourDetailImage[0].path;
+
     const newTour = new Tour({
       cityName,
       duration,
       price,
       description,
       tourImage: req.files.tourImage[0].path, // Cloudinary image URL
+      tourDetailImage,  // Cloudinary image URL
       famousPlaces
     });
 
@@ -73,6 +76,10 @@ exports.updateTour = async (req, res) => {
       // Update images only if they are provided
       if (req.files.tourImage) {
         updateData.tourImage = req.files.tourImage[0].path; // New main tour image
+      }
+
+      if (req.files.tourDetailImage) {
+        updateData.tourDetailImage = req.files.tourDetailImage[0].path; // New main tour image
       }
   
       if (req.body.famousPlaces) {

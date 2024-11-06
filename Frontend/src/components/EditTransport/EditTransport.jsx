@@ -14,10 +14,12 @@ const EditTransport = () => {
     price: '',
     about: '',
     vehicleImage: null,
+    vehicleDetailImage: null ,
     vehicleImages: []
   });
   const [loading, setLoading] = useState(true);
   const [imagePreview, setImagePreview] = useState(null);
+  const [imageDetailPreview, setImageDetailPreview] = useState(null);
   const [additionalImagesPreview, setAdditionalImagesPreview] = useState([]);
   const { enqueueSnackbar } = useSnackbar(); 
 
@@ -47,7 +49,13 @@ const EditTransport = () => {
     if (name === 'vehicleImage') {
       setVehicle({ ...vehicle, vehicleImage: files[0] });
       setImagePreview(URL.createObjectURL(files[0])); // Preview the main image
-    } else if (name === 'vehicleImages') {
+    } 
+    else if (name === 'vehicleDetailImage'){
+      setVehicle({ ...vehicle, vehicleDetailImage: files[0] });
+      setImageDetailPreview(URL.createObjectURL(files[0])); // Preview the main image
+    }
+    
+    else if (name === 'vehicleImages') {
       const selectedImages = Array.from(files);
       setVehicle({ ...vehicle, vehicleImages: selectedImages });
       setAdditionalImagesPreview(selectedImages.map(file => URL.createObjectURL(file))); // Preview additional images
@@ -55,6 +63,26 @@ const EditTransport = () => {
       setVehicle((prev) => ({ ...prev, [name]: value }));
     }
   };
+
+  const handleSpecificImageChange = (e, index) => {
+    const file = e.target.files[0];
+    if (file) {
+      // Update the specific image in vehicleImages array
+      setVehicle((prev) => {
+        const updatedImages = [...prev.vehicleImages];
+        updatedImages[index] = file; // Replace the image at the specified index
+        return { ...prev, vehicleImages: updatedImages };
+      });
+  
+      // Update preview for the specific image
+      setAdditionalImagesPreview((prev) => {
+        const updatedPreviews = [...prev];
+        updatedPreviews[index] = URL.createObjectURL(file); // Set preview for the selected image
+        return updatedPreviews;
+      });
+    }
+  };
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -71,10 +99,16 @@ const EditTransport = () => {
     if (vehicle.vehicleImage) {
       formData.append('vehicleImage', vehicle.vehicleImage);
     }
-    vehicle.vehicleImages.forEach((image) => {
-      formData.append('vehicleImages', image);
-    });
 
+    if (vehicle.vehicleDetailImage) {
+      formData.append('vehicleDetailImage', vehicle.vehicleDetailImage);
+    }
+    // Append only changed additional images
+  vehicle.vehicleImages.forEach((image, index) => {
+    if (image) {
+      formData.append(`vehicleImages[${index}]`, image); // Append each image individually
+    }
+  });
     try {
     const response = await axios.put(`http://localhost:6600/trasnport/${id}`, formData, {
         headers: {
@@ -173,23 +207,35 @@ const EditTransport = () => {
           </div>
 
           <div className="mb-4">
-            <label className="block text-white mb-1" htmlFor="vehicleImages">Additional Vehicle Images</label>
+            <label className="block text-white mb-1" htmlFor="vehicleDetailImage">Main Detail Image</label>
             <input
               type="file"
-              id="vehicleImages"
-              name="vehicleImages"
+              id="vehicleDetailImage"
+              name="vehicleDetailImage"
               accept="image/*"
-              multiple
               onChange={handleChange}
               className="w-full p-2 rounded bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
-            {additionalImagesPreview.length > 0 && (
-              <div className="mt-2 grid grid-cols-3 gap-2">
-                {additionalImagesPreview.map((image, index) => (
-                  <img key={index} src={image} alt={`Additional Preview ${index + 1}`} className="w-full h-40 object-cover" />
-                ))}
-              </div>
-            )}
+            {imageDetailPreview && <img src={imageDetailPreview} alt="Main Preview" className="mt-2 w-full h-40 object-cover" />}
+          </div>
+
+          <div className="mb-4">
+            <label className="block text-white mb-1" htmlFor="vehicleImages">Additional Vehicle Images</label>
+            {vehicle.vehicleImages.map((image, index) => (
+  <div key={index} className="relative">
+    <img
+      src={additionalImagesPreview[index] || image} // Show existing or newly updated image preview
+      alt={`Vehicle Image ${index + 1}`}
+      className="w-full h-40 object-cover"
+    />
+    <input
+      type="file"
+      accept="image/*"
+      onChange={(e) => handleSpecificImageChange(e, index)} // Update specific image
+      className="mt-2"
+    />
+  </div>
+))}
           </div>
 
           <button type="submit" className="bg-lime-500 text-white py-2 px-4 rounded hover:bg-lime-600 transition duration-200">

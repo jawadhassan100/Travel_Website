@@ -16,6 +16,7 @@ const EditTour = () => {
   });
   const [loading, setLoading] = useState(true);
   const [tourImage, setTourImage] = useState(null); // State for main tour image
+  const [tourDetailImage, setTourDetailImage] = useState(null); // State for main tour image
   const [famousPlacesImages, setFamousPlacesImages] = useState([]); // State for famous places images
   const {enqueueSnackbar} = useSnackbar()
 
@@ -53,6 +54,9 @@ const EditTour = () => {
   const handleTourImageChange = (e) => {
     setTourImage(e.target.files[0]);
   };
+  const handleTourDetailImageChange = (e) => {
+    setTourDetailImage(e.target.files[0]);
+  };
 
   const handleFamousPlacesImagesChange = (index, e) => {
     const updatedImages = [...famousPlacesImages];
@@ -73,6 +77,9 @@ const EditTour = () => {
     // Append the new tour image if it exists
     if (tourImage) {
       formData.append('tourImage', tourImage);
+    }
+    if (tourDetailImage) {
+      formData.append('tourDetailImage', tourDetailImage);
     }
 
     // Append famous places and their images
@@ -176,6 +183,16 @@ const EditTour = () => {
               type="file"
               id="tourImage"
               onChange={handleTourImageChange}
+              className="w-full p-2 rounded bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+
+          <div className="mb-4">
+            <label className="block text-white mb-1" htmlFor="tourImage">Tour Image</label>
+            <input
+              type="file"
+              id="tourImage"
+              onChange={handleTourDetailImageChange}
               className="w-full p-2 rounded bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>

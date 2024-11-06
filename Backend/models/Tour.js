@@ -11,6 +11,7 @@ const tourSchema = new mongoose.Schema({
   price: { type: Number, required: true },
   description: { type: String, required: true },
   tourImage: { type: String, required: true }, // This will store the Cloudinary image URL
+  tourDetailImage: { type: String, required: true },
   famousPlaces: [famousPlaceSchema] // Array of famous places with name and image
 });
 

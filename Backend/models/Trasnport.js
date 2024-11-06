@@ -5,6 +5,10 @@ const VehicleSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  vehicleDetailImage: {
+    type: String,
+    required: true
+  },
   vehicleName: {
     type: String,
     required: true

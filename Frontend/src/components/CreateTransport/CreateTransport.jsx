@@ -6,6 +6,7 @@ import { useSnackbar } from 'notistack';
 const CreateTransport = () => {
   const [vehicleData, setVehicleData] = useState({
     vehicleImage: null,
+    vehicleDetailImage: null ,
     vehicleName: '',
     fullVehicleName: '',
     price: '',
@@ -26,6 +27,9 @@ const CreateTransport = () => {
 
   const handleMainImageChange = (e) => {
     setVehicleData({ ...vehicleData, vehicleImage: e.target.files[0] });
+  };
+  const handleDetailImageChange = (e) => {
+    setVehicleData({ ...vehicleData, vehicleDetailImage: e.target.files[0] });
   };
 
   const handleAdditionalImageChange = (e, index) => {
@@ -54,6 +58,9 @@ const CreateTransport = () => {
     if (vehicleData.vehicleImage) {
       formData.append('vehicleImage', vehicleData.vehicleImage);
     }
+    if (vehicleData.vehicleDetailImage) {
+      formData.append('vehicleDetailImage', vehicleData.vehicleDetailImage);
+    }
     vehicleData.vehicleImages.forEach((image) => {
       if (image) {
         formData.append('vehicleImages', image);
@@ -76,6 +83,7 @@ const CreateTransport = () => {
 
       setVehicleData({
         vehicleImage: null,
+        vehicleDetailImage: null,
         vehicleName: '',
         fullVehicleName: '',
         price: '',
@@ -101,6 +109,17 @@ const CreateTransport = () => {
               type="file"
               accept="image/*"
               onChange={handleMainImageChange}
+              className="bg-gray-700 text-gray-300 rounded p-2 focus:outline-none"
+              required
+            />
+          </div>
+
+          <div className="flex flex-col space-y-2">
+            <label className="font-semibold">Vehicle Detail Image</label>
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleDetailImageChange}
               className="bg-gray-700 text-gray-300 rounded p-2 focus:outline-none"
               required
             />

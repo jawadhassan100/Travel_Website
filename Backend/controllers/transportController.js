@@ -10,10 +10,13 @@ exports.addVehicle = async (req, res) => {
     const vehicleImage = req.files.vehicleImage[0].path; // Main vehicle image
     const vehicleImages = req.files.vehicleImages ? req.files.vehicleImages.map(img => img.path) : []; // Additional images
 
+     // Access vehicleDetailImage directly
+     const vehicleDetailImage = req.files.vehicleDetailImage[0].path; // Detail vehicle image
     // Create a new vehicle instance
     const newVehicle = new Vehicle({
       vehicleImage, // URL of the uploaded vehicle image
       vehicleName,
+      vehicleDetailImage,
       fullVehicleName,
       price,
       about,
@@ -82,6 +85,9 @@ exports.getVehicleById = async (req, res) => {
         updateData.vehicleImages = req.files.vehicleImages.map(img => img.path); // New additional images
       }
   
+      if (req.files.vehicleDetailImage) {
+        updateData.vehicleDetailImage = req.files.vehicleDetailImage[0].path; // New detail image
+      }
       const updatedVehicle = await Vehicle.findByIdAndUpdate(id, updateData, { new: true, runValidators: true }); // Update vehicle and return the new object
   
       if (!updatedVehicle) {

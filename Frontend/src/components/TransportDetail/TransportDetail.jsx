@@ -45,7 +45,7 @@ const TransportDetail = () => {
       
         <div
           className="h-[90vh] bg-cover bg-center"
-          style={{ backgroundImage: `url(${transport.vehicleImage})` }} 
+          style={{ backgroundImage: `url(${transport.vehicleDetailImage})` }} 
         >
           <div className="flex ">
             <div className="lg:w-[896px] lg:px-[46px] md:px-[26px] sm:ml-4 z-0 w-[350px] md:w-[600px]">

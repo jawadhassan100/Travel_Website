@@ -12,6 +12,7 @@ const router = express.Router();
 // Route to add a new tour (with image uploads)
 router.post('/', upload.fields([
   { name: 'tourImage', maxCount: 1 },
+  { name: 'tourDetailImage', maxCount: 1 },
   { name: 'famousPlaces[0][image]', maxCount: 1 },
   { name: 'famousPlaces[1][image]', maxCount: 1 },
   { name: 'famousPlaces[2][image]', maxCount: 1 },
@@ -28,6 +29,7 @@ router.get('/:id',  getTourById);
 // Route to update a tour by ID (with optional image uploads)
 router.put('/:id', upload.fields([
   { name: 'tourImage', maxCount: 1 },
+  { name: 'tourDetailImage', maxCount: 1 },
   { name: 'famousPlaces[0][image]', maxCount: 1 },
   { name: 'famousPlaces[1][image]', maxCount: 1 },
   { name: 'famousPlaces[2][image]', maxCount: 1 },

@@ -20,6 +20,7 @@ const CreateTour = () => {
   const { enqueueSnackbar } = useSnackbar(); 
   
   const [tourImage, setTourImage] = useState(null);
+  const [tourDetailImage, setTourDetailImage] = useState(null);
   useEffect(() => {
     // Scroll to top on component mount
     window.scrollTo(0, 0);
@@ -45,6 +46,11 @@ const CreateTour = () => {
     setTourImage(e.target.files[0]);
   };
 
+  const handleFileDetailChange = (e) => {
+    setTourDetailImage(e.target.files[0]);
+  };
+  
+
   const handleFamousPlaceImageChange = (e, index) => {
     const updatedPlaces = [...tourData.famousPlaces];
     updatedPlaces[index].image = e.target.files[0];
@@ -62,6 +68,9 @@ const CreateTour = () => {
 
     if (tourImage) {
       formData.append('tourImage', tourImage);
+    }
+    if (tourDetailImage) {
+      formData.append('tourDetailImage', tourDetailImage);
     }
 
     tourData.famousPlaces.forEach((place, index) => {
@@ -162,6 +171,16 @@ const CreateTour = () => {
           <input
             type="file"
             onChange={handleFileChange}
+             className="bg-gray-700 text-gray-300 rounded p-2 focus:outline-none"
+            required
+          />
+        </div>
+
+        <div className="flex flex-col">
+          <label className="font-semibold">Tour Detail Image:</label>
+          <input
+            type="file"
+            onChange={handleFileDetailChange}
              className="bg-gray-700 text-gray-300 rounded p-2 focus:outline-none"
             required
           />
