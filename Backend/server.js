@@ -18,7 +18,7 @@ const app = express();
 // Middleware
 app.use(
     cors({
-      origin: "https://travel-website-u4md.vercel.app/",
+      origin: "https://travel-website-u4md.vercel.app",
       credentials: true // enable set cookie
     })
   );
