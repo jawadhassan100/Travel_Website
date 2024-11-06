@@ -1,6 +1,6 @@
 
 const config = {
-    BASE_URL: "http://localhost:7820"
+    BASE_URL: "https://travel-website-khaki-tau.vercel.app"
   };
   
   export default config;

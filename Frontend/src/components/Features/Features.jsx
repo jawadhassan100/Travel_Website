@@ -1,4 +1,4 @@
-import shieldCheck from "../../assets/shieldCheck.svg";
+import shieldCheck from "../../assets/ShieldCheck.svg";
 import airplane from "../../assets/Airplane.svg";
 import faders from "../../assets/Faders.svg";
 import { motion } from "framer-motion";
